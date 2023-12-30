@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://olalu6ql3csx"]
+[gd_scene load_steps=16 format=3 uid="uid://olalu6ql3csx"]
 
 [ext_resource type="Texture2D" uid="uid://dxn04rj6mwe8r" path="res://Art/industrial.v2.png" id="1_4slm3"]
 [ext_resource type="Script" path="res://Scripts/CharacterMovement.cs" id="1_ru38a"]
+[ext_resource type="Texture2D" uid="uid://bpr433gg1bdc1" path="res://Art/2dlights.webp" id="3_oi33b"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_q6gca"]
 
@@ -86,7 +87,6 @@ max_contacts_reported = 1
 contact_monitor = true
 lock_rotation = true
 script = ExtResource("1_ru38a")
-JumpSpeed = 300.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ilb8t")
@@ -96,6 +96,11 @@ sprite_frames = SubResource("SpriteFrames_uqt5k")
 frame = 3
 frame_progress = 0.273928
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.15
-one_shot = true
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(-26, -26)
+energy = 16.0
+range_z_min = 0
+range_z_max = 0
+shadow_enabled = true
+texture = ExtResource("3_oi33b")
+texture_scale = 0.01

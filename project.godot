@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Breathe"
-run/main_scene="res://Nodes/TestMap.tscn"
+run/main_scene="res://Nodes/Start.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

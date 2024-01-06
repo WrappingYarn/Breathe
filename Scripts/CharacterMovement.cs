@@ -5,7 +5,7 @@ public partial class CharacterMovement : RigidBody2D
 	[Export]
 	public float Speed { get; set; } = 150f;
 	[Export]
-	public float JumpSpeed { get; set; } = 200f;
+	public float JumpSpeed { get; set; } = 300f;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

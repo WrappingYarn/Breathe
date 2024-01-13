@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://v64rf2dujsu8"]
+
+[ext_resource type="Script" path="res://Scripts/BreathingController.cs" id="1_quqdu"]
+[ext_resource type="Texture2D" uid="uid://bpr433gg1bdc1" path="res://Art/2dlights.webp" id="2_a72ol"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_54cij"]
+radius = 42.87
+
+[node name="Area2D" type="Area2D" groups=["PlayersLight"]]
+script = ExtResource("1_quqdu")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+rotation = -3.14159
+scale = Vector2(1.3, 1.3)
+energy = 3.2
+range_z_min = 0
+range_z_max = 0
+shadow_enabled = true
+texture = ExtResource("2_a72ol")
+texture_scale = 0.01
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.3, 1.3)
+shape = SubResource("CircleShape2D_54cij")
+debug_color = Color(0.172549, 0.411765, 0.168627, 0.419608)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

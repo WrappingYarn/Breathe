@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://olalu6ql3csx"]
+[gd_scene load_steps=16 format=3 uid="uid://olalu6ql3csx"]
 
 [ext_resource type="Texture2D" uid="uid://dxn04rj6mwe8r" path="res://Art/industrial.v2.png" id="1_4slm3"]
 [ext_resource type="Script" path="res://Scripts/CharacterMovement.cs" id="1_ru38a"]
-[ext_resource type="Script" path="res://Scripts/BreathingController.cs" id="2_ahj8e"]
-[ext_resource type="Texture2D" uid="uid://bpr433gg1bdc1" path="res://Art/2dlights.webp" id="3_oi33b"]
+[ext_resource type="PackedScene" uid="uid://v64rf2dujsu8" path="res://Nodes/BreathingLight.tscn" id="3_hhsih"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_q6gca"]
 
@@ -82,9 +81,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_54cij"]
-
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="RigidBody2D" type="RigidBody2D" groups=["Player"]]
 physics_material_override = SubResource("PhysicsMaterial_q6gca")
 lock_rotation = true
 max_contacts_reported = 1
@@ -99,18 +96,5 @@ sprite_frames = SubResource("SpriteFrames_uqt5k")
 frame = 3
 frame_progress = 0.273928
 
-[node name="Area2D" type="Area2D" parent="."]
-script = ExtResource("2_ahj8e")
-
-[node name="PointLight2D" type="PointLight2D" parent="Area2D"]
-rotation = -3.14159
-scale = Vector2(1e-05, 1e-05)
-energy = 3.2
-range_z_min = 0
-range_z_max = 0
-shadow_enabled = true
-texture = ExtResource("3_oi33b")
-texture_scale = 0.01
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_54cij")
+[node name="Area2D" parent="." node_paths=PackedStringArray("_player") instance=ExtResource("3_hhsih")]
+_player = NodePath("..")

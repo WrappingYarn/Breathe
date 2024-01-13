@@ -81,7 +81,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="RigidBody2D" type="RigidBody2D" groups=["Player"]]
+[node name="Player" type="RigidBody2D" groups=["Player"]]
 physics_material_override = SubResource("PhysicsMaterial_q6gca")
 lock_rotation = true
 max_contacts_reported = 1

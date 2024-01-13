@@ -57,7 +57,6 @@ public partial class BreathingController : Node
 			}
 			if (_oldTime >= variance)
 			{
-				Debug.WriteLine(_light.Scale);
 				_breath *= -1;
 				_oldTime = 0f;
 			}

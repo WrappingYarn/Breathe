@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://olalu6ql3csx"]
+[gd_scene load_steps=17 format=3 uid="uid://olalu6ql3csx"]
 
 [ext_resource type="Texture2D" uid="uid://dxn04rj6mwe8r" path="res://Art/industrial.v2.png" id="1_4slm3"]
 [ext_resource type="Script" path="res://Scripts/CharacterMovement.cs" id="1_ru38a"]
 [ext_resource type="PackedScene" uid="uid://v64rf2dujsu8" path="res://Nodes/BreathingLight.tscn" id="3_hhsih"]
+[ext_resource type="Script" path="res://Scripts/CameraController.cs" id="4_ndi2c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_q6gca"]
 
@@ -98,3 +99,7 @@ frame_progress = 0.273928
 
 [node name="Area2D" parent="." node_paths=PackedStringArray("_player") instance=ExtResource("3_hhsih")]
 _player = NodePath("..")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+script = ExtResource("4_ndi2c")

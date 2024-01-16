@@ -1,0 +1,121 @@
+[gd_scene load_steps=12 format=3 uid="uid://dfks4qqb0sbdl"]
+
+[ext_resource type="Texture2D" uid="uid://dxn04rj6mwe8r" path="res://Art/industrial.v2.png" id="2_v5wtq"]
+[ext_resource type="Texture2D" uid="uid://bpr433gg1bdc1" path="res://Art/2dlights.webp" id="3_hjybn"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_eppr3"]
+script/source = "using Godot;
+using System;
+using System.Diagnostics;
+
+public partial class ExitDoor : Node
+{
+	[Export]
+	private AnimatedSprite2D _animation;
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+		//_animation = GetNode<AnimatedSprite2D>(\"DoorAnimation\");
+		if(_animation != null){
+			_animation.Play(\"Closed\");
+		}
+		else {
+			Debug.WriteLine(\"not got animation door\");
+		}
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
+	
+	public void Open()
+	{
+		// _animation.Play(\"Opening\");
+		// System.Threading.Thread.Sleep(1000);
+		// _animation.Play(\"Opened\");
+	}
+}
+"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_52j1b"]
+specular_color = Color(0.345098, 0.345098, 0.345098, 1)
+specular_shininess = 0.55
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eiwgt"]
+atlas = ExtResource("2_v5wtq")
+region = Rect2(48, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxonc"]
+atlas = ExtResource("2_v5wtq")
+region = Rect2(0, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cct8"]
+atlas = ExtResource("2_v5wtq")
+region = Rect2(48, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0uuk"]
+atlas = ExtResource("2_v5wtq")
+region = Rect2(32, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g20xm"]
+atlas = ExtResource("2_v5wtq")
+region = Rect2(16, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxy3k"]
+atlas = ExtResource("2_v5wtq")
+region = Rect2(0, 176, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4bxis"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eiwgt")
+}],
+"loop": true,
+"name": &"Closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxonc")
+}],
+"loop": true,
+"name": &"Opened",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cct8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0uuk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g20xm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxy3k")
+}],
+"loop": false,
+"name": &"Opening",
+"speed": 5.0
+}]
+
+[node name="Door" type="Node2D"]
+script = SubResource("CSharpScript_eppr3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(16, 16)
+texture = SubResource("CanvasTexture_52j1b")
+
+[node name="DoorAnimation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4bxis")
+animation = &"Opening"
+frame = 3
+frame_progress = 1.0
+
+[node name="PointLight2D" type="PointLight2D" parent="DoorAnimation"]
+color = Color(0.831373, 0.215686, 0.486275, 1)
+energy = 4.03
+texture = ExtResource("3_hjybn")

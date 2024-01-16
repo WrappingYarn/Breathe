@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://b1y5ga7801elw"]
+
+[ext_resource type="Script" path="res://Scripts/DoorSwitch.cs" id="1_0mjo2"]
+[ext_resource type="Texture2D" uid="uid://dxn04rj6mwe8r" path="res://Art/industrial.v2.png" id="2_5yg1g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k1p0"]
+atlas = ExtResource("2_5yg1g")
+region = Rect2(64, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38c4j"]
+atlas = ExtResource("2_5yg1g")
+region = Rect2(80, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkuoc"]
+atlas = ExtResource("2_5yg1g")
+region = Rect2(96, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy6ky"]
+atlas = ExtResource("2_5yg1g")
+region = Rect2(112, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r62ac"]
+atlas = ExtResource("2_5yg1g")
+region = Rect2(64, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iinjj"]
+atlas = ExtResource("2_5yg1g")
+region = Rect2(112, 160, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l5tqk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k1p0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38c4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkuoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sy6ky")
+}],
+"loop": false,
+"name": &"Charging",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r62ac")
+}],
+"loop": true,
+"name": &"Off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iinjj")
+}],
+"loop": true,
+"name": &"On",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jb7kk"]
+radius = 4.0
+height = 16.0
+
+[node name="Area2D" type="Area2D" groups=["DoorSwitch"]]
+script = ExtResource("1_0mjo2")
+
+[node name="DoorSwitchAnimation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_l5tqk")
+animation = &"Charging"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_jb7kk")

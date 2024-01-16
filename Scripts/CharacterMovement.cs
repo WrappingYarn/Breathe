@@ -6,9 +6,16 @@ public partial class CharacterMovement : RigidBody2D
 	public float Speed { get; set; } = 150f;
 	[Export]
 	public float JumpSpeed { get; set; } = 300f;
+	[Export]
+	private Vector2 _maxPoint;
+	[Export]
+	private Vector2 _minPoint;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		var camera = GetNode<Camera2D>("Camera2D");
+		Debug.WriteLine(camera == null);
+		((camera as Node) as CameraController).SetMinMax(_minPoint, _maxPoint);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

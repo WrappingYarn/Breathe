@@ -21,6 +21,7 @@ layer_1/tile_data = PackedInt32Array(851974, 1245184, 0, 917503, 1245184, 0, 851
 
 [node name="RigidBody2D" parent="Node" instance=ExtResource("2_hd665")]
 position = Vector2(27, 190)
+_maxPoint = Vector2(577, 288)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

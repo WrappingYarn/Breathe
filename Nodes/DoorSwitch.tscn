@@ -67,7 +67,7 @@ animations = [{
 radius = 4.0
 height = 16.0
 
-[node name="Area2D" type="Area2D" groups=["DoorSwitch"]]
+[node name="DoorSwitch" type="Area2D" groups=["DoorSwitch"]]
 script = ExtResource("1_0mjo2")
 
 [node name="DoorSwitchAnimation" type="AnimatedSprite2D" parent="."]

@@ -14,7 +14,6 @@ public partial class CharacterMovement : RigidBody2D
 	public override void _Ready()
 	{
 		var camera = GetNode<Camera2D>("Camera2D");
-		Debug.WriteLine(camera == null);
 		((camera as Node) as CameraController).SetMinMax(_minPoint, _maxPoint);
 	}
 

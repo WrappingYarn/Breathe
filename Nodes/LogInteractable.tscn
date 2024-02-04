@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://eg0c4erknpl5"]
+
+[ext_resource type="Script" path="res://Scripts/LogInteractable.cs" id="1_aw26v"]
+
+[node name="LogInteractable" type="Node2D" node_paths=PackedStringArray("_logView")]
+script = ExtResource("1_aw26v")
+_logView = NodePath("CanvasLayer/Panel/RichTextLabel")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+offset = Vector2(175, 75)
+transform = Transform2D(1, 0, 0, 1, 175, 75)
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+offset_left = -161.0
+offset_top = 98.0
+offset_right = 390.0
+offset_bottom = 200.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_right = 230.0
+offset_bottom = 112.0
+scroll_following = true
+tab_size = 0

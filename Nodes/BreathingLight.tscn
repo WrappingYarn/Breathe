@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_54cij"]
 radius = 42.87
 
-[node name="Area2D" type="Area2D" groups=["PlayersLight"]]
+[node name="BreathingLight" type="Area2D" groups=["PlayersLight"]]
 script = ExtResource("1_quqdu")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]

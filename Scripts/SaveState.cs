@@ -50,4 +50,9 @@ public partial class SaveState : Node
 		_data.LevelName = LevelOrder.Get(levelNumber);
 	}
 
+	public void AddLog(int logNumber)
+	{
+		_data.LogsRead.Add(logNumber);
+	}
+
 }

@@ -10,34 +10,47 @@ public partial class CharacterMovement : RigidBody2D
 	private Vector2 _maxPoint;
 	[Export]
 	private Vector2 _minPoint;
+	private Key _left;
+	private Key _right;
+	private Key _jump;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		var camera = GetNode<Camera2D>("Camera2D");
 		((camera as Node) as CameraController).SetMinMax(_minPoint, _maxPoint);
+		var options = GetNode<OptionsState>("/root/OptionsState").GetKeyBindings();
+		_left = options["Left"];
+		_right = options["Right"];
+		_jump = options["Jump"];
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
+		// if(Input.IsKeyPressed(Key.F4)){
+		// 	var save = GetNode<SaveState>("/root/SaveState");
+		// 	Debug.WriteLine(save.GetProp("LevelNumber"));
+		// 	save.Save();
+		// }
+
 		var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
 		var isMoving = false;
-		if (Input.IsKeyPressed(Key.Right))
+		if (Input.IsKeyPressed(_right))
 		{
 			animatedSprite2D.FlipH = false;
 			isMoving = true;
 			float move = Speed;
 			SetAxisVelocity(Vector2.Right * move);
 		}
-		else if (Input.IsKeyPressed(Key.Left))
+		else if (Input.IsKeyPressed(_left))
 		{
 			animatedSprite2D.FlipH = true;
 			isMoving = true;
 			float move = Speed;
 			SetAxisVelocity(Vector2.Left * move);
 		}
-		if (Input.IsKeyPressed(Key.Up) && LinearVelocity.Y == 0)
+		if (Input.IsKeyPressed(_jump) && LinearVelocity.Y == 0)
 		{
 			isMoving = true;
 			float move = JumpSpeed;

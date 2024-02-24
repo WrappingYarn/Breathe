@@ -24,12 +24,15 @@ public partial class LogInteractable : Node2D
 	private int _currentPage = 0;
 	private float _timeLeftToGoNext = 0f;
 	private float _timeToGoNext = .25f;
+	private Key _interact;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		ProcessMode = ProcessModeEnum.Always;
 		_saveState = GetNode<SaveState>("/root/SaveState");
+		var options = GetNode<OptionsState>("/root/OptionsState").GetKeyBindings();
+		_interact = options["Interact"];
 		_canvas = GetNode<CanvasLayer>("CanvasLayer");
 		_logToDisplay = Logs.GetLogNumber(_logNumber);
 		_canvas.Hide();
@@ -49,7 +52,7 @@ public partial class LogInteractable : Node2D
 	{
 		if(_player.Position.DistanceTo(_position) < 8)
 		{
-			if(Input.IsKeyPressed(Key.Z) && _timeLeftToGoNext <= 0)
+			if(Input.IsKeyPressed(_interact) && _timeLeftToGoNext <= 0)
 			{
 				if(_isOpen)
 				{

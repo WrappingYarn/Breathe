@@ -12,10 +12,13 @@ public partial class ExitDoor : Node2D
 	private RigidBody2D _player;
 	[Export]
 	private int _levelNumber;
+	private Key _interact;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_saveState = GetNode<SaveState>("/root/SaveState");
+		var options = GetNode<OptionsState>("/root/OptionsState").GetKeyBindings();
+		_interact = options["Interact"];
 		_animation = GetNode<AnimatedSprite2D>("DoorAnimation");
 		if(_animation != null){
 			if(_state == DoorState.Closed)
@@ -31,7 +34,7 @@ public partial class ExitDoor : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(_state == DoorState.Open && Input.IsKeyPressed(Key.Space))
+		if(_state == DoorState.Open && Input.IsKeyPressed(_interact))
 		{
 			if(_player.Position.DistanceTo(Position) < 8)
 			{

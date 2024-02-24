@@ -3,11 +3,14 @@ using System;
 
 public partial class StartButtons : Node
 {
+	[Export]
+	private CanvasLayer _optionsCanvas;
 	private SaveState _saveState;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_saveState = GetNode<SaveState>("/root/SaveState");
+		_optionsCanvas.Hide();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,7 +26,7 @@ public partial class StartButtons : Node
 	
 	private void OnPressedOptions()
 	{
-		// Replace with function body.
+		_optionsCanvas.Show();
 	}
 	
 	private void OnPressedCredits()

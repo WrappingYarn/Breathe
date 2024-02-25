@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://df2oc835nrocf"]
+[gd_scene load_steps=5 format=3 uid="uid://df2oc835nrocf"]
 
 [ext_resource type="PackedScene" uid="uid://bwvd0a62rfdk" path="res://Nodes/TileMap.tscn" id="1_oqc3j"]
 [ext_resource type="Script" path="res://Scripts/StartButtons.cs" id="1_wso4g"]
 [ext_resource type="PackedScene" uid="uid://olalu6ql3csx" path="res://Nodes/MainCharacter.tscn" id="2_hd665"]
+[ext_resource type="Script" path="res://Scripts/KeyBindingButton.cs" id="4_c47f7"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -25,36 +26,6 @@ _maxPoint = Vector2(577, 288)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Button2" type="Button" parent="CanvasLayer"]
-layout_direction = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.666
-anchor_right = 0.5
-anchor_bottom = 0.666
-offset_left = -35.0
-offset_top = -15.5
-offset_right = 35.0
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Options"
-
-[node name="Button3" type="Button" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.832
-anchor_right = 0.5
-anchor_bottom = 0.832
-offset_left = -31.5
-offset_top = -15.5
-offset_right = 31.5
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Credits
-"
-
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
 clip_contents = false
 anchors_preset = -1
@@ -72,7 +43,7 @@ theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
 text = "[wave amp=150 freq=3][center][rainbow freq=.25]Breathe"
 
-[node name="Button4" type="Button" parent="CanvasLayer"]
+[node name="Button4" type="Button" parent="CanvasLayer" node_paths=PackedStringArray("_optionsCanvas")]
 layout_direction = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -87,7 +58,152 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Start"
 script = ExtResource("1_wso4g")
+_optionsCanvas = NodePath("../../CanvasLayer2")
 
-[connection signal="pressed" from="CanvasLayer/Button2" to="CanvasLayer/Button4" method="OnPressedOptions"]
-[connection signal="pressed" from="CanvasLayer/Button3" to="CanvasLayer/Button4" method="OnPressedCredits"]
+[node name="Button2" type="Button" parent="CanvasLayer" node_paths=PackedStringArray("_optionsCanvas")]
+layout_direction = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.666
+anchor_right = 0.5
+anchor_bottom = 0.666
+offset_left = -35.0
+offset_top = -15.5
+offset_right = 35.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Options"
+script = ExtResource("1_wso4g")
+_optionsCanvas = NodePath("../../CanvasLayer2")
+
+[node name="Button3" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.832
+anchor_right = 0.5
+anchor_bottom = 0.832
+offset_left = -31.5
+offset_top = -15.5
+offset_right = 31.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Credits
+"
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer2"]
+top_level = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.0
+offset_top = -129.0
+offset_right = 271.0
+offset_bottom = 129.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer2/Panel"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 540.0
+offset_bottom = 258.0
+tab_alignment = 1
+
+[node name="Controls" type="GridContainer" parent="CanvasLayer2/Panel/TabContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 12
+columns = 2
+
+[node name="Button" type="Button" parent="CanvasLayer2/Panel/TabContainer/Controls" node_paths=PackedStringArray("_description", "_buttons", "_canvasLayer")]
+layout_mode = 2
+text = "Move Left"
+script = ExtResource("4_c47f7")
+_controlName = "Left"
+_description = NodePath("../RichTextLabel")
+_buttons = [NodePath("../Button2"), NodePath("../Button3"), NodePath("../Button4"), NodePath("../Button5")]
+_canvasLayer = NodePath("../../../..")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2/Panel/TabContainer/Controls"]
+clip_contents = false
+custom_minimum_size = Vector2(114, 0)
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Left Arrow"
+scroll_active = false
+autowrap_mode = 0
+tab_size = 0
+
+[node name="Button2" type="Button" parent="CanvasLayer2/Panel/TabContainer/Controls" node_paths=PackedStringArray("_description", "_buttons", "_canvasLayer")]
+layout_mode = 2
+text = "Move Right"
+script = ExtResource("4_c47f7")
+_controlName = "Right"
+_description = NodePath("../RichTextLabel2")
+_buttons = [NodePath("../Button"), NodePath("../Button3"), NodePath("../Button4"), NodePath("../Button5")]
+_canvasLayer = NodePath("../../../..")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer2/Panel/TabContainer/Controls"]
+clip_contents = false
+layout_mode = 2
+text = "Right Arrow"
+
+[node name="Button3" type="Button" parent="CanvasLayer2/Panel/TabContainer/Controls" node_paths=PackedStringArray("_description", "_buttons", "_canvasLayer")]
+layout_mode = 2
+text = "Jump"
+script = ExtResource("4_c47f7")
+_controlName = "Jump"
+_description = NodePath("../RichTextLabel3")
+_buttons = [NodePath("../Button"), NodePath("../Button2"), NodePath("../Button4"), NodePath("../Button5")]
+_canvasLayer = NodePath("../../../..")
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer2/Panel/TabContainer/Controls"]
+clip_contents = false
+layout_mode = 2
+text = "Up Arrow"
+
+[node name="Button4" type="Button" parent="CanvasLayer2/Panel/TabContainer/Controls" node_paths=PackedStringArray("_description", "_buttons", "_canvasLayer")]
+layout_mode = 2
+text = "Interact"
+script = ExtResource("4_c47f7")
+_controlName = "Interact"
+_description = NodePath("../RichTextLabel4")
+_buttons = [NodePath("../Button"), NodePath("../Button2"), NodePath("../Button3"), NodePath("../Button5")]
+_canvasLayer = NodePath("../../../..")
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="CanvasLayer2/Panel/TabContainer/Controls"]
+clip_contents = false
+layout_mode = 2
+text = "Z"
+
+[node name="Button5" type="Button" parent="CanvasLayer2/Panel/TabContainer/Controls" node_paths=PackedStringArray("_description", "_buttons", "_canvasLayer")]
+layout_mode = 2
+text = "Hold Breath"
+script = ExtResource("4_c47f7")
+_controlName = "HoldBreath"
+_description = NodePath("../RichTextLabel5")
+_buttons = [NodePath("../Button"), NodePath("../Button2"), NodePath("../Button3"), NodePath("../Button4")]
+_canvasLayer = NodePath("../../../..")
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="CanvasLayer2/Panel/TabContainer/Controls"]
+clip_contents = false
+layout_mode = 2
+text = "Spacebar"
+
 [connection signal="pressed" from="CanvasLayer/Button4" to="CanvasLayer/Button4" method="OnPressedStart"]
+[connection signal="pressed" from="CanvasLayer/Button2" to="CanvasLayer/Button2" method="OnPressedOptions"]
+[connection signal="pressed" from="CanvasLayer/Button3" to="CanvasLayer/Button4" method="OnPressedCredits"]
+[connection signal="pressed" from="CanvasLayer2/Panel/TabContainer/Controls/Button" to="CanvasLayer2/Panel/TabContainer/Controls/Button" method="OnButtonPressed"]
+[connection signal="pressed" from="CanvasLayer2/Panel/TabContainer/Controls/Button2" to="CanvasLayer2/Panel/TabContainer/Controls/Button2" method="OnButtonPressed"]
+[connection signal="pressed" from="CanvasLayer2/Panel/TabContainer/Controls/Button3" to="CanvasLayer2/Panel/TabContainer/Controls/Button3" method="OnButtonPressed"]
+[connection signal="pressed" from="CanvasLayer2/Panel/TabContainer/Controls/Button4" to="CanvasLayer2/Panel/TabContainer/Controls/Button4" method="OnButtonPressed"]
+[connection signal="pressed" from="CanvasLayer2/Panel/TabContainer/Controls/Button5" to="CanvasLayer2/Panel/TabContainer/Controls/Button5" method="OnButtonPressed"]

@@ -102,7 +102,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Door" type="Node2D"]
+[node name="ExitDoor" type="Node2D"]
 script = SubResource("CSharpScript_eppr3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

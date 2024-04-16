@@ -1,0 +1,115 @@
+[gd_scene load_steps=11 format=3 uid="uid://ir6re8w2m1cb"]
+
+[ext_resource type="Texture2D" uid="uid://dxn04rj6mwe8r" path="res://Art/industrial.v2.png" id="1_q6hb3"]
+[ext_resource type="Script" path="res://Scripts/squareBox.cs" id="2_r8wcs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwagi"]
+size = Vector2(48, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tpas"]
+size = Vector2(16, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e3r5h"]
+texture = ExtResource("1_q6hb3")
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+19:0/0 = 0
+20:0/0 = 0
+21:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_kg1np"]
+sources/1 = SubResource("TileSetAtlasSource_e3r5h")
+
+[sub_resource type="TileSet" id="TileSet_8yd5y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnqan"]
+atlas = ExtResource("1_q6hb3")
+region = Rect2(192, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n74o6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnqan")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ifky"]
+size = Vector2(16, 16)
+
+[node name="PlatformNode" type="Node2D"]
+position = Vector2(195, 187)
+scale = Vector2(5, 5)
+
+[node name="Platform" type="Area2D" parent="."]
+position = Vector2(-23.8, 44.6)
+disable_mode = 1
+collision_layer = 7
+monitoring = false
+monitorable = false
+gravity_space_override = 4
+linear_damp = 0.0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+visible = false
+position = Vector2(40, 24)
+shape = SubResource("RectangleShape2D_dwagi")
+disabled = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Platform"]
+visible = false
+position = Vector2(40, 48)
+shape = SubResource("RectangleShape2D_0tpas")
+disabled = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Platform"]
+disable_mode = 1
+collision_layer = 7
+
+[node name="TileMap" type="TileMap" parent="Platform/StaticBody2D"]
+tile_set = SubResource("TileSet_kg1np")
+format = 2
+layer_0/tile_data = PackedInt32Array(65537, 786433, 0, 65538, 851969, 0, 65539, 917505, 0, 131074, 786433, 0, 196610, 786433, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platform/StaticBody2D"]
+process_physics_priority = 1
+light_mask = 3
+visibility_layer = 3
+position = Vector2(16, 16)
+build_mode = 1
+polygon = PackedVector2Array(0, 0, 48, 0, 48, 16, 32, 16, 32, 48, 16, 48, 16, 16, 0, 16)
+
+[node name="TileMap2" type="TileMap" parent="Platform/StaticBody2D"]
+visible = false
+tile_set = SubResource("TileSet_8yd5y")
+collision_animatable = true
+format = 2
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(-2, 1)
+disable_mode = 2
+collision_layer = 7
+freeze_mode = 1
+continuous_cd = 1
+max_contacts_reported = 1
+contact_monitor = true
+linear_damp_mode = 1
+angular_damp = 100.0
+
+[node name="squareBox" type="AnimatedSprite2D" parent="RigidBody2D"]
+position = Vector2(38, 6)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_n74o6")
+script = ExtResource("2_r8wcs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(38, 6)
+shape = SubResource("RectangleShape2D_7ifky")
+
+[connection signal="area_entered" from="Platform" to="RigidBody2D/squareBox" method="_on_platform_area_entered"]

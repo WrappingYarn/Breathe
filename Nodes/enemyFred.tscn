@@ -1,0 +1,147 @@
+[gd_scene load_steps=17 format=3 uid="uid://bm2u78tywi2ja"]
+
+[ext_resource type="Script" path="res://Scripts/enemyFred.cs" id="1_7b0x4"]
+[ext_resource type="Texture2D" uid="uid://dxn04rj6mwe8r" path="res://Art/industrial.v2.png" id="2_ylnq2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8ujq"]
+size = Vector2(14, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63ou5"]
+atlas = ExtResource("2_ylnq2")
+region = Rect2(0, 368, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynu83"]
+atlas = ExtResource("2_ylnq2")
+region = Rect2(16, 368, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w36dh"]
+atlas = ExtResource("2_ylnq2")
+region = Rect2(32, 368, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4u2xt"]
+atlas = ExtResource("2_ylnq2")
+region = Rect2(48, 368, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ego4"]
+atlas = ExtResource("2_ylnq2")
+region = Rect2(64, 368, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydkvp"]
+atlas = ExtResource("2_ylnq2")
+region = Rect2(80, 368, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tw2ml"]
+atlas = ExtResource("2_ylnq2")
+region = Rect2(128, 368, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u34k7"]
+atlas = ExtResource("2_ylnq2")
+region = Rect2(144, 368, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rr8i"]
+atlas = ExtResource("2_ylnq2")
+region = Rect2(160, 368, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1w18"]
+atlas = ExtResource("2_ylnq2")
+region = Rect2(176, 368, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kkvx"]
+atlas = ExtResource("2_ylnq2")
+region = Rect2(192, 368, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0fpn1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63ou5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynu83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w36dh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4u2xt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ego4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydkvp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tw2ml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u34k7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rr8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1w18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kkvx")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vu67l"]
+radius = 24.0832
+
+[node name="RigidBody2D" type="RigidBody2D"]
+disable_mode = 2
+collision_layer = 7
+collision_mask = 0
+collision_priority = 2.0
+mass = 0.01
+gravity_scale = 2.0
+constant_force = Vector2(0, 0.5)
+script = ExtResource("1_7b0x4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_p8ujq")
+one_way_collision_margin = 5.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.886275, 0.717647, 0.152941, 1)
+sprite_frames = SubResource("SpriteFrames_0fpn1")
+animation = &"walk"
+
+[node name="detectionBox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("CircleShape2D_vu67l")
+disabled = true
+
+[node name="health" type="Sprite2D" parent="."]
+light_mask = 0
+visibility_layer = 0
+scale = Vector2(0.9, 0.75)
+
+[node name="healthLabel" type="Label" parent="health"]
+modulate = Color(1, 1, 0.00784314, 1)
+anchors_preset = -1
+anchor_left = -14.0
+anchor_top = -20.0
+anchor_right = 13.75
+anchor_bottom = -10.0
+offset_right = 9.25
+offset_bottom = 4.0
+scale = Vector2(0.75, 0.75)
+theme_override_font_sizes/font_size = 10
+text = "Hp: 10
+"
+
+[node name="TakeDamageTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
